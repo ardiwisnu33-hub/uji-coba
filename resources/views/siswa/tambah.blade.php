@@ -19,7 +19,7 @@
         </nav>
     </header>
     <div class="container mt-4">
-    <form action="{{ url('/siswa/tambah') }}" method="post">
+    <form action="{{ url('/siswa/tambah') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
@@ -54,8 +54,8 @@
                     is-invalid
                 @enderror" name="jenis_kelamin" id="jenis_kelamin">
                     <option value="">Pilih Jenis Kelamin</option>
-                    <option value="L">Laki-laki</option>
-                    <option value="P">Perempuan</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
                 </select>
                 @error('jenis_kelamin')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -85,6 +85,15 @@
                     is-invalid
                 @enderror" name="alamat" id="alamat">
                 @error('alamat')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto</label>
+                <input type="file" class="form-control @error('foto')
+                    is-invalid
+                @enderror" id="foto" name="foto">
+                @error('foto')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

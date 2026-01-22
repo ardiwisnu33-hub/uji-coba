@@ -21,7 +21,7 @@
     </header>
 
     <div class="container mt-3">
-        <form action="{{ url('/siswa/update/'.$siswa->id) }}" method="post">
+        <form action="{{ url('/siswa/update/'.$siswa->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="mb-3">
@@ -56,8 +56,8 @@
                 <select class="form-control @error('jenis_kelamin')
                     is-invalid
                 @enderror" name="jenis_kelamin" id="jenis_kelamin">
-                    <option value="L" {{ $siswa->jenis_kelamin == 'L' ? 'selected' : null }}>Laki-laki</option>
-                    <option value="P" {{ $siswa->jenis_kelamin == 'P' ? 'selected' : null }}>Perempuan</option>
+                    <option value="Laki-laki" {{ $siswa->jenis_kelamin == 'Laki-laki' ? 'selected' : null }}>Laki-laki</option>
+                    <option value="Perempuan" {{ $siswa->jenis_kelamin == 'Perempuan' ? 'selected' : null }}>Perempuan</option>
                 </select>
                 @error('jenis_kelamin')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -90,6 +90,18 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+                        @isset($data->foto)
+                            <img src="{{ asset('foto_siswa' . '/' . $data->foto) }}" alt="foto {{ $data->nama }}"
+                                class="img-thumbnail" style="width: 20%;">
+                        @endisset
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Foto Siswa</label>
+                            <input type="file" name="foto" id="foto"
+                                class="form-control @error('foto') is-invalid @enderror" value="{{ old('foto') }}">
+                            @error('foto')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
             <div class="text-center mt-3">
                 <a href="{{ url('/data-siswa') }}" class="btn btn-secondary">Kembali</a>
                 <button type="submit" class="btn btn-success">Simpan</button>

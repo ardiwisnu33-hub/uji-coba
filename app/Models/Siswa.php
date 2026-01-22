@@ -16,6 +16,7 @@ class Siswa extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'alamat',
+        'foto',
     ];
 
     protected $casts = [

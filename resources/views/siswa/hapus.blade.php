@@ -40,9 +40,16 @@
                 <th>Alamat</th>
                 <td>{{ $siswa->alamat }}</td>
             </tr>
+            <tr>
+                <th>Foto</th>
+                <td>
+                    <img src="{{ asset('foto_siswa/' . $siswa->foto) }}" alt="Foto {{ $siswa->nama }}" class="img-thumbnail" style="width: 150px;">
+                </td>
+            </tr>
         </table>
-        <form action="{{ url('/siswa/hapus/' . $siswa->id) }}" method="post">
+        <form action="{{ url('/siswa/delete/' . $siswa->id) }}" method="post">
             @csrf
+            @method('delete')
             <div class="text-center">
                 <a href="{{ url('/data-siswa') }}" class="btn btn-secondary">Batal</a>
                 <button type="submit" class="btn btn-danger">Hapus</button>
