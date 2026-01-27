@@ -1,5 +1,5 @@
 @extends('layouts.back')
-@section('title','edit')
+@section('title','Edit')
 @section('content')
     
 <form action="{{ url('/siswa/update/'.$siswa->id) }}" method="post" enctype="multipart/form-data">

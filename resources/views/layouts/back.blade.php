@@ -11,12 +11,14 @@
     </head>  
 <body>
     <header class="header" style="background-color: rgb(92, 51, 240); align-items: center;">
-        <h1 style="color: white; text-align: center;">Data Siswa</h1>
+        <h1 style="color: white; text-align: center;">@yield('title')</h1>
         <nav class="navbar">
             <ul style="list-style-type: none; text-decoration: none; display: flex;">
                 <li><a href="{{ url('/index') }}" style="color: white; text-decoration: none; margin: 5px; font-family: sans-serif;">Home</a></li>
                 <li><a href="{{ url('/data-siswa') }}" style="color: white; text-decoration: none; margin: 5px; font-family: sans-serif;">Data Siswa</a></li>
                 <li><a href="{{ url('/about') }}" style="color: white; text-decoration: none; margin: 5px; font-family: sans-serif;">About</a></li>
+                <li><a href="{{ url('/homepage') }}" style="color: white; text-decoration: none; margin: 5px; font-family: sans-serif;">Pendaftaran</a></li>
+                <li><a href="{{ url('/logout') }}" style="color: white; text-decoration: none; margin: 5px; font-family: sans-serif;">Logout</a></li>
             </ul>
         </nav>
     </header>

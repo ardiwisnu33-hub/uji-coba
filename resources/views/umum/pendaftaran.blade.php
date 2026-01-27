@@ -1,8 +1,8 @@
-@extends('layouts.back')
-@section('title', 'tambah')
+@extends('layouts.front')
+@section('title','form-pendaftaran')
 @section('content')
 
-<form action="{{ url('/siswa/tambah') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/simpan/pendaftaran') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="nama" class="form-label">Nama</label>
@@ -64,7 +64,7 @@
             </div>
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <input type="text" class="form-control @error('alamat')
+                <input type="textarea" class="form-control @error('alamat')
                 is-invalid
                 @enderror" name="alamat" id="alamat">
                 @error('alamat')
@@ -81,8 +81,9 @@
                 @enderror
             </div>
             <div class="text-center">
-                <a href="{{ url('/data-siswa') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-success">Simpan</button>
+                <a href="{{ url('/homepage') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-success">Daftar</button>
             </div>
         </form>
-@endsection        
+    
+@endsection
