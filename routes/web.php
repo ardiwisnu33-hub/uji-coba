@@ -1,16 +1,22 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndexController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::get('/index', [IndexController::class, 'index']);
+Route::get('/about', [IndexController::class, 'about']);
+Route::get('/homepage', [HomeController::class, 'homepage']);
+Route::get('/pendaftaran', [HomeController::class, 'pendaftaran']);
+Route::post('/simpan/pendaftaran', [HomeController::class, 'SimpanPendaftaran']);
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/index', [IndexController::class, 'index']);
-    Route::get('/about', [IndexController::class, 'about']);
     Route::get('/data-siswa', [IndexController::class, 'dataSiswa']);
     Route::get('/siswa/tambah', [IndexController::class, 'create']);
     Route::post('/siswa/tambah', [IndexController::class, 'store']);
@@ -20,9 +26,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/siswa/delete/{id}', [IndexController::class, 'destroy']);
 });
 
-Route::get('/homepage', [HomeController::class, 'homepage']);
-Route::get('/pendaftaran', [HomeController::class, 'pendaftaran']);
-Route::post('/simpan/pendaftaran', [HomeController::class, 'SimpanPendaftaran']);
 
 Route::get('/login', [AuthController::class, 'halLogin']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -31,4 +34,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
-Route::get('/homepage', [HomeController::class, 'homepage'])->middleware('auth');
+Route::get('/homepage', [HomeController::class, 'homepage']);
+
+Route::get('/user',[UserController::class,'index'])->middleware('auth');
+Route::get('/edit/admin/{id}',[UserController::class,'editAdmin'])->middleware('auth');
+Route::post('/update/admin/{id}',[UserController::class,'update'])->middleware('auth');
+
+Route::get('/dashboard',[UserController::class,'dashboard'])->middleware('auth');

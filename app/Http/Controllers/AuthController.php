@@ -25,7 +25,7 @@ class AuthController extends Controller
         if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
             sweetalert()->success('Login berhasil.');
-            return redirect()->intended('/data-siswa');
+            return redirect()->intended('/dashboard');
         }else{
             sweetalert()->error('Login gagal. Periksa email dan password Anda.');
             return redirect('/login')->withInput();
@@ -37,6 +37,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         sweetalert()->success('Anda telah logout.');
-        return redirect('/login');
+        return redirect('/');
     }
 }

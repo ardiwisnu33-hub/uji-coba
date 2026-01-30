@@ -2,6 +2,20 @@
 @section('title', 'Data Siswa')
 @section('content')
 
+    <div class="mt-2">
+        <a href="{{ url('/data-siswa') }}" class="text-decoration-none mt-3 btn btn-primary text-center">Tambah Data</a>
+    </div>
+    <div class="col-12 col-sm-8 col-md-4 my-3">
+        <label for="" class="mb-3">Cari Data Siswa</label>
+        <form action="{{ url('/data-siswa') }}" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control ml-2" name="cari"
+                    placeholder="Nama Siswa, Kelas, dan Jurusan." required>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Cari</button>
+                    <a href="{{ url('/data-siswa') }}" class="btn btn-danger">Batal</a>
+            </div>
+        </form>
+    </div>
     <table class="table table-bordered mt-3 shadow">
         <thead class="text-center">
             <tr>
@@ -18,10 +32,11 @@
             </tr>
         </thead>
         <tbody>
-            @if (count($dataSiswa) > 0)
-                @foreach ($dataSiswa as $s)
+            @if (count($data) > 0)
+                @foreach ($data as $s)
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
+                        {{-- td ini diganti dengan kode td 1 baris dibawah ini agar menampilkan data per halaman dengan nomor urut yang benar <td class="text-center">{{ $loop->iteration }}</td> --}}
+                        <td>{{ $loop->iteration + ($data->currentPage()-1) * $data->perPage() }}</td>
                         <td>{{ $s->nama }}</td>
                         <td>{{ $s->kelas }}</td>
                         <td>{{ $s->jurusan }}</td>
@@ -36,7 +51,7 @@
                             </center>
                         </td>
                         <td align="center">
-                            <a href="{{ url('/siswa/edit/' . $s->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ url('/siswa/edit/' . $s->id) }}" class="btn btn-warning my-2">Edit</a>
                             <a href="{{ url('/siswa/hapus/' . $s->id) }}" class="btn btn-danger">Hapus</a>
                         </td>
                     </tr>
@@ -50,9 +65,7 @@
             @endif
         </tbody>
     </table>
-    <div class="text-center">
-        <a href="{{ url('siswa/tambah') }}" class="text-decoration-none mt-3 btn btn-primary text-center">Tambah Data</a>
-    </div>
+    {{ $data->appends(request()->query())->links() }}
 
 @endsection
 

@@ -14,10 +14,23 @@ class IndexController extends Controller
         return view('index');
     }
 
-    public function dataSiswa()
+    public function dataSiswa(Request $request)
     {
-        $dataSiswa = Siswa::latest()->get();
-        return view('siswa.data-siswa', ['dataSiswa' => $dataSiswa]);
+        $cari = $request->cari;
+        if (! empty($cari)) {
+        $data = Siswa::latest()
+        ->where(function ($query) use ($cari){
+            if ($cari) {
+                $query->where('nama', 'like', "%".$cari."%")
+                      ->orWhere('kelas', 'like', "%".$cari."%")
+                      ->orWhere('jurusan', 'like', "%".$cari."%");
+            }
+        })
+        ->paginate(5);
+        } else {
+            $data = Siswa::latest()->paginate(5);
+        }
+        return view('siswa.data-siswa', ['data' => $data, 'cari' => $cari]);
     }
 
     public function about()

@@ -1,5 +1,5 @@
 @extends('layouts.back')
-@section('title', 'tambah')
+@section('title', 'Tambah Data Siswa')
 @section('content')
 
 <form action="{{ url('/siswa/tambah') }}" method="post" enctype="multipart/form-data">
